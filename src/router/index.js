@@ -1,3 +1,11 @@
+/*
+ * @Author: bruce yu
+ * @Date: 2021-01-03 19:37:33
+ * @LastEditTime: 2021-02-09 17:43:21
+ * @LastEditors: Please set LastEditors
+ * @Description: router config
+ * @FilePath: /data-visualize/src/router/index.js
+ */
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
@@ -18,6 +26,11 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue")
+  },
+  {
+    path: "/sellerpage",
+    name: "SellerPage",
+    component: () => import('../views/SellerPage')
   }
 ];
 
