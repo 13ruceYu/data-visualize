@@ -1,7 +1,7 @@
 /*
  * @Author: bruce yu
  * @Date: 2021-01-03 19:37:33
- * @LastEditTime: 2021-02-09 17:43:21
+ * @LastEditTime: 2021-02-19 16:07:32
  * @LastEditors: Please set LastEditors
  * @Description: router config
  * @FilePath: /data-visualize/src/router/index.js
@@ -31,6 +31,11 @@ const routes = [
     path: "/sellerpage",
     name: "SellerPage",
     component: () => import('../views/SellerPage')
+  },
+  {
+    path: "/trendpage",
+    name: "TrendPage",
+    component: () => import('../views/TrendPage')
   }
 ];
 

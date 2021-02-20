@@ -1,7 +1,7 @@
 /*
  * @Author: bruce yu
  * @Date: 2021-01-03 19:37:33
- * @LastEditTime: 2021-02-18 22:23:35
+ * @LastEditTime: 2021-02-19 20:37:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/main.js
@@ -11,6 +11,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+
+// 引入字体文件
+import './assets/font/iconfont.css'
 
 // axios 基准路径配置
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/'
