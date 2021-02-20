@@ -1,7 +1,7 @@
 /*
  * @Author: bruce yu
  * @Date: 2021-01-03 19:37:33
- * @LastEditTime: 2021-02-19 16:07:32
+ * @LastEditTime: 2021-02-20 11:44:43
  * @LastEditors: Please set LastEditors
  * @Description: router config
  * @FilePath: /data-visualize/src/router/index.js
@@ -36,6 +36,12 @@ const routes = [
     path: "/trendpage",
     name: "TrendPage",
     component: () => import('../views/TrendPage')
+  }
+  ,
+  {
+    path: "/mappage",
+    name: "MapPage",
+    component: () => import('../views/MapPage')
   }
 ];
 
