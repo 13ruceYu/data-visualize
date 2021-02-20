@@ -1,7 +1,7 @@
 /*
  * @Author: bruce yu
  * @Date: 2021-01-03 19:37:33
- * @LastEditTime: 2021-02-20 16:14:23
+ * @LastEditTime: 2021-02-20 20:19:41
  * @LastEditors: Please set LastEditors
  * @Description: router config
  * @FilePath: /data-visualize/src/router/index.js
@@ -46,6 +46,11 @@ const routes = [
     path: "/rankpage",
     name: "RankPage",
     component: () => import('../views/RankPage')
+  },
+  {
+    path: "/hotpage",
+    name: "HotPage",
+    component: () => import('../views/HotPage')
   }
 ];
 

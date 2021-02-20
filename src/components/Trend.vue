@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-19 16:01:55
- * @LastEditTime: 2021-02-19 21:23:35
+ * @LastEditTime: 2021-02-20 22:21:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/components/Trend.vue
@@ -9,7 +9,7 @@
 <template>
   <div class="comp-container">
     <div class="title" :style="compStyle">
-      <span>{{ '┃' + showTitle }}</span>
+      <span>{{ '▎' + showTitle }}</span>
       <span :style="compStyle" class="iconfont title-icon" @click="showChoice = !showChoice">&#xe6eb;</span>
       <div class="select-con" v-show="showChoice" :style="marginStyle">
         <div class="select-item" v-for="item in selectTypes" :key="item.key" @click="handleSelect(item.key)">

@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-09 17:31:10
- * @LastEditTime: 2021-02-19 15:46:18
+ * @LastEditTime: 2021-02-20 22:21:35
  * @LastEditors: Please set LastEditors
  * @Description: 横向柱状图表
  * @FilePath: /data-visualize/src/components/Seller.vue
@@ -44,7 +44,7 @@ export default {
       // 图表初始化配置
       const initOption = {
         title: {
-          text: '┃ 商家销售统计',
+          text: '▎商家销售统计',
           left: 20,
           top: 20
         },

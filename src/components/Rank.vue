@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-20 16:11:38
- * @LastEditTime: 2021-02-20 20:14:20
+ * @LastEditTime: 2021-02-20 22:21:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/components/Rank.vue
