@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-21 21:22:54
- * @LastEditTime: 2021-02-21 23:11:24
+ * @LastEditTime: 2021-02-21 23:47:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/views/ScreenPage.vue
@@ -12,13 +12,13 @@
       <div>
         <img :src="headerSrc" alt="" />
       </div>
-      <span class="logo">
+      <!-- <span class="logo">
         <img :src="logoSrc" alt="" />
-      </span>
-      <span class="title">电商平台实时监控系统</span>
+      </span> -->
+      <span class="title">数据可视化系统</span>
       <div class="title-right">
         <img :src="themeSrc" class="qiehuan" @click="handleChangeTheme" />
-        <span class="datetime">2049-01-01 00:00:00</span>
+        <span class="datetime">2021-01-01 00:00:00</span>
       </div>
     </header>
     <div class="screen-body">
@@ -139,13 +139,21 @@ export default {
   created() {
     // 注册接收数据的回调函数
     this.$socket.registerCallBack('fullScreen', this.recvData)
+    this.$socket.registerCallBack('themeChange', this.recvThemeChange)
   },
   destroyed() {
     this.$socket.unRegisterCallBack('fullScreen')
+    this.$socket.unRegisterCallBack('themeChange')
   },
   methods: {
     handleChangeTheme() {
-      this.$store.commit('changeTheme')
+      // this.$store.commit('changeTheme')
+      this.$socket.send({
+        action: 'themeChange',
+        socketType: 'themeChange',
+        chartName: '',
+        value: ''
+      })
     },
     changeSize(chartName) {
       // // 1.改变 fullScreenStatus 的数据
@@ -175,6 +183,9 @@ export default {
       this.$nextTick(() => {
         this.$refs[chartName].screenAdapter()
       })
+    },
+    recvThemeChange() {
+      this.$store.commit('changeTheme')
     }
   }
 }

@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-21 10:30:48
- * @LastEditTime: 2021-02-21 21:57:25
+ * @LastEditTime: 2021-02-21 23:20:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/components/Stock.vue
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'Stock',
   components: {},
@@ -22,6 +23,18 @@ export default {
       allData: null,
       currentIndex: 0, // 当前显示的数据
       timerId: null
+    }
+  },
+  computed: {
+    ...mapState(['theme'])
+  },
+  watch: {
+    theme() {
+      console.log('theme 变了！')
+      this.chartInstance.dispose() // 销毁当前图表
+      this.initChart()
+      this.screenAdapter()
+      this.updateChart()
     }
   },
   created() {
@@ -54,7 +67,7 @@ export default {
           top: 20
         }
       }
-      this.chartInstance = this.$echarts.init(this.$refs.stock_ref, 'chalk')
+      this.chartInstance = this.$echarts.init(this.$refs.stock_ref, this.theme)
       this.chartInstance.setOption(initOption)
       this.chartInstance.on('mouseover', () => {
         clearInterval(this.timerId)

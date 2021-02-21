@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-20 16:11:38
- * @LastEditTime: 2021-02-21 21:16:25
+ * @LastEditTime: 2021-02-21 23:22:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/components/Rank.vue
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'Rank',
   data() {
@@ -22,6 +23,18 @@ export default {
       startValue: 0, // 区域缩放的起点值
       endValue: 9, // 区域缩放的终点值
       timerId: null
+    }
+  },
+  computed: {
+    ...mapState(['theme'])
+  },
+  watch: {
+    theme() {
+      console.log('theme 变了！')
+      this.chartInstance.dispose() // 销毁当前图表
+      this.initChart()
+      this.screenAdapter()
+      this.updateChart()
     }
   },
   created() {
@@ -47,7 +60,7 @@ export default {
   },
   methods: {
     initChart() {
-      this.chartInstance = this.$echarts.init(this.$refs.rank_ref, 'chalk')
+      this.chartInstance = this.$echarts.init(this.$refs.rank_ref, this.theme)
       const initOption = {
         title: {
           text: '▎地区销售排行',

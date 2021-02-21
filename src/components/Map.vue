@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-20 11:41:49
- * @LastEditTime: 2021-02-21 22:01:53
+ * @LastEditTime: 2021-02-21 23:23:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/components/Map.vue
@@ -16,6 +16,7 @@
 // import chinaMap from '../../public/static/map/china.json'
 import { getProvinceMapInfo } from '@/utils/map_utils'
 import axios from 'axios'
+import { mapState } from 'vuex'
 export default {
   name: 'Map',
   components: {},
@@ -24,6 +25,18 @@ export default {
       chartInstance: null,
       allData: null,
       mapData: {} // 以获取省份的地图缓存数据
+    }
+  },
+  computed: {
+    ...mapState(['theme'])
+  },
+  watch: {
+    theme() {
+      console.log('theme 变了！')
+      this.chartInstance.dispose() // 销毁当前图表
+      this.initChart()
+      this.screenAdapter()
+      this.updateChart()
     }
   },
   created() {
@@ -47,7 +60,7 @@ export default {
   },
   methods: {
     async initChart() {
-      this.chartInstance = this.$echarts.init(this.$refs.map_ref, 'chalk')
+      this.chartInstance = this.$echarts.init(this.$refs.map_ref, this.theme)
       // 获取中国地图的矢量数据
       const ret = await axios.get('http://localhost:8080/static/map/china.json')
       this.$echarts.registerMap('china', ret.data)

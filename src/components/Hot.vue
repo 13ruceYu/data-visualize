@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-20 20:17:44
- * @LastEditTime: 2021-02-21 21:52:56
+ * @LastEditTime: 2021-02-21 23:29:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/components/Hot.vue
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import { getThemeValue } from '@/utils/theme_utils'
 export default {
   name: 'Hot',
   data() {
@@ -26,7 +28,17 @@ export default {
       titleFontSize: 0
     }
   },
+  watch: {
+    theme() {
+      console.log('theme 变了！')
+      this.chartInstance.dispose() // 销毁当前图表
+      this.initChart()
+      this.screenAdapter()
+      this.updateChart()
+    }
+  },
   computed: {
+    ...mapState(['theme']),
     catName() {
       if (!this.allData) {
         return ''
@@ -36,7 +48,8 @@ export default {
     },
     arrStyle() {
       return {
-        fontSize: this.titleFontSize + 'px'
+        fontSize: this.titleFontSize + 'px',
+        color: getThemeValue(this.theme).titleColor
       }
     }
   },
@@ -62,7 +75,7 @@ export default {
   },
   methods: {
     initChart() {
-      this.chartInstance = this.$echarts.init(this.$refs.hot_ref, 'chalk')
+      this.chartInstance = this.$echarts.init(this.$refs.hot_ref, this.theme)
       const initOption = {
         title: {
           text: '▎热销商品占比',

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-21 17:43:23
- * @LastEditTime: 2021-02-21 23:06:03
+ * @LastEditTime: 2021-02-21 23:39:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/utils/socket_service.js
@@ -75,7 +75,9 @@ export default class SocketService {
         else if (action === 'fullScreen') {
           this.callBackMapping[socketType].call(this, recvData)
         }
-        // else if (action === 'themeChange') {}
+        else if (action === 'themeChange') {
+          this.callBackMapping[socketType].call(this, recvData)
+        }
       }
     }
   }

@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-19 16:01:55
- * @LastEditTime: 2021-02-21 21:54:34
+ * @LastEditTime: 2021-02-21 23:31:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/components/Trend.vue
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import { getThemeValue } from '@/utils/theme_utils'
 export default {
   name: 'Trend',
   components: {},
@@ -34,7 +36,17 @@ export default {
       titleFontSize: 0 // 标题字体大小
     }
   },
+  watch: {
+    theme() {
+      console.log('theme 变了！')
+      this.chartInstance.dispose() // 销毁当前图表
+      this.initChart()
+      this.screenAdapter()
+      this.updateChart()
+    }
+  },
   computed: {
+    ...mapState(['theme']),
     selectTypes() {
       if (!this.allData) {
         return []
@@ -53,7 +65,8 @@ export default {
     },
     compStyle() {
       return {
-        fontSize: this.titleFontSize + 'px'
+        fontSize: this.titleFontSize + 'px',
+        color: getThemeValue(this.theme).titleColor
       }
     },
     marginStyle() {
@@ -86,7 +99,7 @@ export default {
   },
   methods: {
     initChart() {
-      this.chartInstance = this.$echarts.init(this.$refs.trend_ref, 'chalk')
+      this.chartInstance = this.$echarts.init(this.$refs.trend_ref, this.theme)
       const initOption = {
         xAxis: {
           type: 'category',
