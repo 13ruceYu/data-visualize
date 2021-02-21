@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-21 17:43:23
- * @LastEditTime: 2021-02-21 20:52:04
+ * @LastEditTime: 2021-02-21 23:06:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/utils/socket_service.js
@@ -72,9 +72,10 @@ export default class SocketService {
           const realData = JSON.parse(recvData.data)
           this.callBackMapping[socketType].call(this, realData)
         }
-        // else if (action === 'fullScreen') {
-
-        // } else if (action === 'themeChange') {}
+        else if (action === 'fullScreen') {
+          this.callBackMapping[socketType].call(this, recvData)
+        }
+        // else if (action === 'themeChange') {}
       }
     }
   }
@@ -92,7 +93,7 @@ export default class SocketService {
   // 发送数据的方法
   send (data) {
     // 判断是否连接成功
-    if (this.connect) {
+    if (this.connected) {
       this.sendRetryCount = 0
       this.ws.send(JSON.stringify(data))
     } else {

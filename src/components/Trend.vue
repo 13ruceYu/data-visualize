@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-19 16:01:55
- * @LastEditTime: 2021-02-21 20:58:20
+ * @LastEditTime: 2021-02-21 21:54:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/components/Trend.vue
@@ -180,8 +180,8 @@ export default {
       this.titleFontSize = (this.$refs.trend_ref.offsetWidth / 100) * 3.6
       const adapterOption = {
         legend: {
-          itemWidth: this.titleFontSize / 2,
-          itemHeight: this.titleFontSize / 2,
+          itemWidth: this.titleFontSize,
+          itemHeight: this.titleFontSize,
           itemGap: this.titleFontSize,
           textStyle: {
             fontSize: this.titleFontSize / 2

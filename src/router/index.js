@@ -1,31 +1,31 @@
 /*
  * @Author: bruce yu
  * @Date: 2021-01-03 19:37:33
- * @LastEditTime: 2021-02-21 10:36:10
+ * @LastEditTime: 2021-02-21 21:25:27
  * @LastEditors: Please set LastEditors
  * @Description: router config
  * @FilePath: /data-visualize/src/router/index.js
  */
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import ScreenPage from "../views/ScreenPage.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home
+    name: "ScreenPage",
+    component: ScreenPage
   },
   {
-    path: "/about",
-    name: "About",
+    path: "/screen",
+    // name: "ScreenPage",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+      import(/* webpackChunkName: "about" */ "../views/ScreenPage.vue")
   },
   {
     path: "/sellerpage",

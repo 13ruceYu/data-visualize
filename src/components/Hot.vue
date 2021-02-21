@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-20 20:17:44
- * @LastEditTime: 2021-02-21 21:03:26
+ * @LastEditTime: 2021-02-21 21:52:56
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/components/Hot.vue
@@ -150,8 +150,8 @@ export default {
           }
         ],
         legend: {
-          itemWidth: this.titleFontSize / 2,
-          itemHeight: this.titleFontSize / 2,
+          itemWidth: this.titleFontSize,
+          itemHeight: this.titleFontSize,
           itemGap: this.titleFontSize / 2,
           textStyle: {
             fontSize: this.titleFontSize / 2

@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-20 11:41:49
- * @LastEditTime: 2021-02-21 21:14:47
+ * @LastEditTime: 2021-02-21 22:01:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/components/Map.vue
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import chinaMap from '../../public/static/map/china.json'
+// import chinaMap from '../../public/static/map/china.json'
 import { getProvinceMapInfo } from '@/utils/map_utils'
 import axios from 'axios'
 export default {
@@ -27,7 +27,7 @@ export default {
     }
   },
   created() {
-    this.$socket.registerCallBack('mapData')
+    this.$socket.registerCallBack('mapData', this.getData)
   },
   mounted() {
     this.initChart()
@@ -46,11 +46,11 @@ export default {
     this.$socket.unRegisterCallBack('mapData')
   },
   methods: {
-    initChart() {
+    async initChart() {
       this.chartInstance = this.$echarts.init(this.$refs.map_ref, 'chalk')
       // 获取中国地图的矢量数据
-      // const ret = await axios.get('http://localhost:8080/static/map/china.json')
-      this.$echarts.registerMap('china', chinaMap)
+      const ret = await axios.get('http://localhost:8080/static/map/china.json')
+      this.$echarts.registerMap('china', ret.data)
       const initOption = {
         title: {
           text: '▎商家分布',

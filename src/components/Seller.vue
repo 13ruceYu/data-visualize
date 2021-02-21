@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-09 17:31:10
- * @LastEditTime: 2021-02-21 21:17:54
+ * @LastEditTime: 2021-02-21 23:16:40
  * @LastEditors: Please set LastEditors
  * @Description: 横向柱状图表
  * @FilePath: /data-visualize/src/components/Seller.vue
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'Seller',
   components: {},
@@ -23,6 +24,18 @@ export default {
       currentPage: 1,
       totalPage: 0,
       timerId: null
+    }
+  },
+  computed: {
+    ...mapState(['theme'])
+  },
+  watch: {
+    theme() {
+      console.log('theme 变了！')
+      this.chartInstance.dispose() // 销毁当前图表
+      this.initChart()
+      this.screenAdapter()
+      this.updateChart()
     }
   },
   created() {
@@ -50,7 +63,7 @@ export default {
   methods: {
     // 初始化 echartInstance 对象
     initChart() {
-      this.chartInstance = this.$echarts.init(this.$refs.seller_ref, 'chalk')
+      this.chartInstance = this.$echarts.init(this.$refs.seller_ref, this.theme)
       // 图表初始化配置
       const initOption = {
         title: {

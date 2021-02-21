@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-21 10:30:48
- * @LastEditTime: 2021-02-21 21:01:07
+ * @LastEditTime: 2021-02-21 21:57:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/components/Stock.vue
@@ -99,12 +99,12 @@ export default {
             position: 'center',
             color: colorArr[index][0]
           },
-          radius: [110, 100],
+          // radius: [110, 100],
           center: centerArr[index],
           data: [
             {
               value: item.sales,
-              name: item.name + '\n' + item.sales,
+              name: item.name + '\n\n' + item.sales,
               itemStyle: {
                 color: new this.$echarts.graphic.LinearGradient(0, 1, 0, 0, [
                   {
@@ -134,8 +134,8 @@ export default {
     },
     screenAdapter() {
       const titleFontSize = (this.$refs.stock_ref.offsetWidth / 100) * 3.6
-      const innerRadius = titleFontSize * 2
-      const outterRadius = innerRadius * 1.123
+      const innerRadius = titleFontSize * 2.8
+      const outterRadius = innerRadius * 1.2
       const adapterOption = {
         title: {
           textStyle: {
