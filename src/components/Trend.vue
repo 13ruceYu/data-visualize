@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-19 16:01:55
- * @LastEditTime: 2021-02-20 22:21:54
+ * @LastEditTime: 2021-02-21 20:58:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/components/Trend.vue
@@ -62,14 +62,27 @@ export default {
       }
     }
   },
+  created() {
+    // 组件创建完成后，进行回调函数的注册
+    this.$socket.registerCallBack('trendData', this.getData)
+  },
   mounted() {
     this.initChart()
-    this.getData()
+    // this.getData()
+    // 发送数据给服务器，
+    this.$socket.send({
+      action: 'getData',
+      socketType: 'trendData',
+      chartName: 'trend',
+      value: ''
+    })
     window.addEventListener('resize', this.screenAdapter)
     this.screenAdapter()
   },
   destroyed() {
     window.removeEventListener('resize', this.screenAdapter)
+    // 组件销毁时，回调函数的注销
+    this.$socket.unRegisterCallBack('trendData')
   },
   methods: {
     initChart() {
@@ -100,8 +113,8 @@ export default {
       }
       this.chartInstance.setOption(initOption)
     },
-    async getData() {
-      const { data } = await this.$http.get('trend')
+    getData(data) {
+      // const { data } = await this.$http.get('trend')
       this.allData = data
       // 对 allData 赋值
       this.updateChart()

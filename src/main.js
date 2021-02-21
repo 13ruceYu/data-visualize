@@ -1,7 +1,7 @@
 /*
  * @Author: bruce yu
  * @Date: 2021-01-03 19:37:33
- * @LastEditTime: 2021-02-19 20:37:33
+ * @LastEditTime: 2021-02-21 20:14:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/main.js
@@ -11,6 +11,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+import SocketService from '@/utils/socket_service'
+// 对服务端进行 websocket 连接
+SocketService.Instance.connect()
 
 // 引入字体文件
 import './assets/font/iconfont.css'
@@ -22,6 +25,9 @@ Vue.prototype.$http = axios
 
 // 全局 echart 挂载
 Vue.prototype.$echarts = window.echarts
+
+// 全局 socket 挂载
+Vue.prototype.$socket = SocketService.Instance
 
 Vue.config.productionTip = false
 

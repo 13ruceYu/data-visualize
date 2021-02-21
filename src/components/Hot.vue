@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-20 20:17:44
- * @LastEditTime: 2021-02-20 23:00:01
+ * @LastEditTime: 2021-02-21 21:03:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/components/Hot.vue
@@ -40,14 +40,25 @@ export default {
       }
     }
   },
+  created() {
+    // 组件创建完成后，进行回调函数的注册
+    this.$socket.registerCallBack('hotData', this.getData)
+  },
   mounted() {
     this.initChart()
-    this.getData()
+    // this.getData()
+    this.$socket.send({
+      action: 'getData',
+      socketType: 'hotData',
+      chartName: 'hotproduct',
+      value: ''
+    })
     window.addEventListener('resize', this.screenAdapter)
     this.screenAdapter()
   },
   destroyed() {
     window.removeEventListener('resize', this.screenAdapter)
+    this.$socket.unRegisterCallBack('hotData')
   },
   methods: {
     initChart() {
@@ -96,8 +107,8 @@ export default {
       }
       this.chartInstance.setOption(initOption)
     },
-    async getData() {
-      const { data } = await this.$http.get('hotproduct')
+    getData(data) {
+      // const { data } = await this.$http.get('hotproduct')
       this.allData = data
       console.log('this.allData: ', this.allData)
       this.updateChart()

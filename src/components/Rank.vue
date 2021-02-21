@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-20 16:11:38
- * @LastEditTime: 2021-02-20 22:21:05
+ * @LastEditTime: 2021-02-21 21:16:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/components/Rank.vue
@@ -24,15 +24,26 @@ export default {
       timerId: null
     }
   },
+  created() {
+    // 组件创建完成后，进行回调函数的注册
+    this.$socket.registerCallBack('rankData', this.getData)
+  },
   mounted() {
     this.initChart()
-    this.getData()
+    // this.getData()
+    this.$socket.send({
+      action: 'getData',
+      socketType: 'rankData',
+      chartName: 'rank',
+      value: ''
+    })
     window.addEventListener('resize', this.screenAdapter)
     this.screenAdapter()
   },
   destroyed() {
     clearInterval(this.timerId)
     window.removeEventListener('resize', this.screenAdapter)
+    this.$socket.unRegisterCallBack('rankData')
   },
   methods: {
     initChart() {
@@ -73,8 +84,8 @@ export default {
         this.startDataZoomInterval()
       })
     },
-    async getData() {
-      const { data } = await this.$http.get('rank')
+    getData(data) {
+      // const { data } = await this.$http.get('rank')
       this.allData = data
       this.updateChart()
       this.startDataZoomInterval()

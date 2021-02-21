@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-20 11:41:49
- * @LastEditTime: 2021-02-20 22:22:08
+ * @LastEditTime: 2021-02-21 21:14:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/components/Map.vue
@@ -26,14 +26,24 @@ export default {
       mapData: {} // 以获取省份的地图缓存数据
     }
   },
+  created() {
+    this.$socket.registerCallBack('mapData')
+  },
   mounted() {
     this.initChart()
-    this.getData()
+    // this.getData()
+    this.$socket.send({
+      action: 'getData',
+      socketType: 'mapData',
+      chartName: 'map',
+      value: ''
+    })
     window.addEventListener('resize', this.screenAdapter)
     this.screenAdapter()
   },
   destroyed() {
     window.removeEventListener('resize', this.screenAdapter)
+    this.$socket.unRegisterCallBack('mapData')
   },
   methods: {
     initChart() {
@@ -80,8 +90,8 @@ export default {
         this.chartInstance.setOption(changeOption)
       })
     },
-    async getData() {
-      const { data } = await this.$http.get('map')
+    getData(data) {
+      // const { data } = await this.$http.get('map')
       this.allData = data
       this.updateChart()
     },

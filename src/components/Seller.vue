@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-09 17:31:10
- * @LastEditTime: 2021-02-20 22:21:35
+ * @LastEditTime: 2021-02-21 21:17:54
  * @LastEditors: Please set LastEditors
  * @Description: 横向柱状图表
  * @FilePath: /data-visualize/src/components/Seller.vue
@@ -25,9 +25,19 @@ export default {
       timerId: null
     }
   },
+  created() {
+    // 组件创建完成后，进行回调函数的注册
+    this.$socket.registerCallBack('sellerData', this.getData)
+  },
   mounted() {
     this.initChart()
-    this.getData()
+    // this.getData()
+    this.$socket.send({
+      action: 'getData',
+      socketType: 'sellerData',
+      chartName: 'seller',
+      value: ''
+    })
     window.addEventListener('resize', this.screenAdapter)
     // 首次加载，主动适配
     this.screenAdapter()
@@ -106,8 +116,8 @@ export default {
       })
     },
     // 获取服务器数据
-    async getData() {
-      const { data } = await this.$http.get('seller')
+    getData(data) {
+      // const { data } = await this.$http.get('seller')
       this.allData = data
       // 数据排序
       this.allData.sort((a, b) => {

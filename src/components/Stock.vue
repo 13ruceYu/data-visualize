@@ -1,7 +1,7 @@
 <!--
  * @Author: bruce yu
  * @Date: 2021-02-21 10:30:48
- * @LastEditTime: 2021-02-21 11:32:16
+ * @LastEditTime: 2021-02-21 21:01:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /data-visualize/src/components/Stock.vue
@@ -24,15 +24,26 @@ export default {
       timerId: null
     }
   },
+  created() {
+    // 组件创建完成后，进行回调函数的注册
+    this.$socket.registerCallBack('stockData', this.getData)
+  },
   mounted() {
     this.initChart()
-    this.getData()
+    // this.getData()
+    this.$socket.send({
+      action: 'getData',
+      socketType: 'stockData',
+      chartName: 'stock',
+      value: ''
+    })
     window.addEventListener('resize', this.screenAdapter)
     this.screenAdapter()
   },
   destroyed() {
     window.removeEventListener('resize', this.screenAdapter)
     clearInterval(this.timerId)
+    this.$socket.unRegisterCallBack('stockData')
   },
   methods: {
     initChart() {
@@ -52,10 +63,9 @@ export default {
         this.startInterval()
       })
     },
-    async getData() {
-      const { data } = await this.$http.get('stock')
+    getData(data) {
+      // const { data } = await this.$http.get('stock')
       this.allData = data
-      console.log('this.allData: ', this.allData)
       this.updateChart()
       this.startInterval()
     },
