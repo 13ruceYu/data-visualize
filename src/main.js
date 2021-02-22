@@ -12,6 +12,9 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import SocketService from '@/utils/socket_service'
+import dataV from '@jiaminghi/data-view'
+
+Vue.use(dataV)
 // 对服务端进行 websocket 连接
 SocketService.Instance.connect()
 
