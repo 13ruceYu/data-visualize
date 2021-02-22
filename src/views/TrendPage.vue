@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Trend from '@/components/Trend'
+import Trend from '@/components/screen_page/Trend'
 export default {
   name: 'TrendPage',
   components: { Trend },

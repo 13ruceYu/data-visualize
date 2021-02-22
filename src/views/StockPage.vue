@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Stock from '@/components/Stock'
+import Stock from '@/components/screen_page/Stock'
 export default {
   name: 'StockPage',
   components: { Stock },

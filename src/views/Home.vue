@@ -9,6 +9,7 @@
 <template>
   <div class="home">
     <h1>home</h1>
+    <router-link to="/screenpage">screen-page</router-link>
   </div>
 </template>
 

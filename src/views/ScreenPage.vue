@@ -96,12 +96,12 @@
 import { mapState } from 'vuex'
 import { getThemeValue } from '@/utils/theme_utils'
 
-import Hot from '@/components/Hot.vue'
-import Map from '@/components/Map.vue'
-import Rank from '@/components/Rank.vue'
-import Seller from '@/components/Seller.vue'
-import Stock from '@/components/Stock.vue'
-import Trend from '@/components/Trend.vue'
+import Hot from '@/components/screen_page/Hot.vue'
+import Map from '@/components/screen_page/Map.vue'
+import Rank from '@/components/screen_page/Rank.vue'
+import Seller from '@/components/screen_page/Seller.vue'
+import Stock from '@/components/screen_page/Stock.vue'
+import Trend from '@/components/screen_page/Trend.vue'
 export default {
   name: 'ScreenPage',
   components: { Hot, Map, Rank, Seller, Stock, Trend },

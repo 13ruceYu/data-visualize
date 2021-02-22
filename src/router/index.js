@@ -8,18 +8,18 @@
  */
 import Vue from "vue";
 import VueRouter from "vue-router";
-import ScreenPage from "../views/ScreenPage.vue";
+import Home from '../views/Home.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "ScreenPage",
-    component: ScreenPage
+    name: "Home",
+    component: Home
   },
   {
-    path: "/screen",
+    path: "/screenpage",
     // name: "ScreenPage",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

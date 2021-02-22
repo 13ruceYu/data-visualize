@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Seller from '@/components/Seller'
+import Seller from '@/components/screen_page/Seller'
 export default {
   name: '',
   components: {

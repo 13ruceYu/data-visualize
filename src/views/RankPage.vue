@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Rank from '@/components/Rank'
+import Rank from '@/components/screen_page/Rank'
 export default {
   name: 'RankPage',
   components: { Rank },

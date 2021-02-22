@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Map from '@/components/Map'
+import Map from '@/components/screen_page/Map'
 export default {
   name: 'MapPage',
   components: { 'single-map': Map },

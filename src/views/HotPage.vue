@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Hot from '@/components/Hot'
+import Hot from '@/components/screen_page/Hot'
 export default {
   name: 'HotPage',
   components: { Hot },
