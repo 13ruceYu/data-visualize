@@ -68,8 +68,11 @@ export default {
   color: #fff;
 
   #dv-full-screen-container {
+    background-image: url('../assets/images/bg-electronic.png');
+    background-size: 100% 100%;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 0 3px blue;
 
     .main-header {
       display: flex;
