@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2021-02-21 21:22:54
- * @LastEditTime: 2021-02-21 23:47:40
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /data-visualize/src/views/ScreenPage.vue
--->
 <template>
   <div class="screen-container" :style="containerStyle">
     <header class="screen-header">
