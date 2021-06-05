@@ -4,19 +4,19 @@
     <div class="count-block-container">
       <div class="count-block block-1">
         <div class="block-title">当前物资总数</div>
-        <div class="block-value">29</div>
+        <div class="block-value">129</div>
       </div>
       <div class="count-block block-2">
         <div class="block-title">在库物资总数</div>
-        <div class="block-value">12</div>
+        <div class="block-value">120</div>
       </div>
       <div class="count-block block-3">
         <div class="block-title">当前物资申领数</div>
-        <div class="block-value">24</div>
+        <div class="block-value">124</div>
       </div>
       <div class="count-block block-4">
         <div class="block-title">7天内物资申领数</div>
-        <div class="block-value">10</div>
+        <div class="block-value">240</div>
       </div>
     </div>
   </div>

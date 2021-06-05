@@ -10,7 +10,7 @@
             class="legend-item"
             v-for="(item, index) in option.series[0].data"
             :key="item.name"
-            @click="$emit('showDetail', item.detail, dataName)"
+            @click="showPopupBoard(item)"
           >
             <span class="legend-icon" :style="{ background: option.color[index] }">{{ item.value }}</span>
             <span class="legend-text">{{ item.name }}</span>
@@ -21,15 +21,40 @@
         </div>
       </div>
     </dv-border-box-12>
+    <PopupBoard
+      v-show="popupBoardVisible"
+      :visible="popupBoardVisible"
+      :popupData="popupBoardData"
+      @closePopup="hidePopup"
+    >
+      <template v-slot:default="slotProps">
+        <div class="popup-title">{{ slotProps.default.popupTitle }}</div>
+        <table class="popup-table">
+          <thead>
+            <th v-for="(item, i) in slotProps.default.tHead" :key="i">{{ item }}</th>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in slotProps.default.tBody" :key="index">
+              <td v-for="(val, key, i) in item" :key="i">{{ val }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+    </PopupBoard>
   </div>
 </template>
 
 <script>
+import PopupBoard from './PopupBoard'
 export default {
   name: 'PieChart4',
+  components: { PopupBoard },
   data() {
     return {
+      popupBoardVisible: false,
+      popupBoardData: {},
       dataName: ['姓名', '年龄', '性别'],
+      // 图标数据
       option: {
         series: [
           {
@@ -42,7 +67,7 @@ export default {
               { name: '防毒面具', value: 6 },
               { name: 'PC盾牌', value: 18 }
             ],
-            roseType: true,
+            // roseType: true,
             outsideLabel: {
               show: false
             },
@@ -53,7 +78,19 @@ export default {
       }
     }
   },
-  methods: {}
+  methods: {
+    showPopupBoard(data) {
+      this.popupBoardVisible = true
+      this.popupBoardData = {
+        tHead: this.dataName,
+        tBody: data.detail,
+        popupTitle: data.name
+      }
+    },
+    hidePopup() {
+      this.popupBoardVisible = false
+    }
+  }
 }
 </script>
 
@@ -107,9 +144,38 @@ export default {
       }
 
       .chart-main {
+        margin-top: -12px;
         width: 50%;
         height: 100%;
       }
+    }
+  }
+
+  .popup-title {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  .popup-table {
+    width: 100%;
+    font-size: 16px;
+
+    thead {
+      border-bottom: 1px solid #fff;
+      th {
+        padding-bottom: 10px;
+      }
+    }
+
+    th,
+    td {
+      text-align: center;
+    }
+
+    td {
+      padding-top: 10px;
     }
   }
 }

@@ -5,19 +5,18 @@ import store from './store'
 import axios from 'axios'
 import SocketService from '@/utils/socket_service'
 import dataV from '@jiaminghi/data-view'
-import { Button, Modal } from 'ant-design-vue'
+import Antd from 'ant-design-vue';
 
 import 'ant-design-vue/dist/antd.css';
 // 引入字体文件
 import './assets/font/iconfont.css'
 import './assets/css/global.less'
 
-Vue.use(Button)
-Vue.use(Modal)
+Vue.use(Antd)
 Vue.use(dataV)
 
 // 对服务端进行 websocket 连接
-SocketService.Instance.connect()
+// SocketService.Instance.connect()
 
 // axios 基准路径配置
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/'

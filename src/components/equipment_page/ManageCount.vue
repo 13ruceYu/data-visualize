@@ -2,21 +2,21 @@
   <div id="manage-count">
     <div class="count-title">管理统计</div>
     <div class="count-block-container">
-      <div class="count-block block-1">
+      <div class="count-block block-1" @click="showPopup">
         <div class="block-title">人员管理</div>
-        <div class="block-value">29</div>
+        <div class="block-value">78</div>
       </div>
       <div class="count-block block-2">
         <div class="block-title">物资种类数</div>
-        <div class="block-value">12</div>
+        <div class="block-value">120</div>
       </div>
       <div class="count-block block-3">
         <div class="block-title">货位总数</div>
-        <div class="block-value">24</div>
+        <div class="block-value">124</div>
       </div>
       <div class="count-block block-4">
         <div class="block-title">当月报警数</div>
-        <div class="block-value">10</div>
+        <div class="block-value">24</div>
       </div>
     </div>
   </div>
@@ -26,14 +26,23 @@
 export default {
   name: 'ManageCount',
   data() {
-    return {}
+    return {
+      visiblePopupBoard: false
+    }
   },
-  methods: {}
+  methods: {
+    showPopup() {
+      this.$emit('showPopup', { data: 'data' })
+      this.visiblePopupBoard = true
+    },
+    hidePopup() {
+      this.visiblePopupBoard = false
+    }
+  }
 }
 </script>
 
 <style lang="less">
-@bdt: solid 1px tomato;
 #manage-count {
   width: 100%;
   height: 100%;
@@ -57,11 +66,11 @@ export default {
 
     .count-block {
       position: absolute;
-      // border: @bdt;
       width: 180px;
       height: 180px;
       background-size: 100% 100%;
       text-align: center;
+      cursor: pointer;
 
       .block-value {
         position: absolute;
