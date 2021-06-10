@@ -5,9 +5,9 @@ import store from './store'
 import axios from 'axios'
 import SocketService from '@/utils/socket_service'
 import dataV from '@jiaminghi/data-view'
-import Antd from 'ant-design-vue';
+import Antd from 'ant-design-vue'
 
-import 'ant-design-vue/dist/antd.css';
+import 'ant-design-vue/dist/antd.css'
 // 引入字体文件
 import './assets/font/iconfont.css'
 import './assets/css/global.less'
@@ -19,7 +19,7 @@ Vue.use(dataV)
 // SocketService.Instance.connect()
 
 // axios 基准路径配置
-axios.defaults.baseURL = 'http://127.0.0.1:8888/api/'
+axios.defaults.baseURL = 'http://192.168.10.114:8090/'
 // axios 全局挂载
 Vue.prototype.$http = axios
 

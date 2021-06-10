@@ -46,19 +46,27 @@
           </div>
         </div>
       </div>
-      <PopupBoard :visible="visiblePopupBoard" :popupData="popupData" @closePopup="hidePopup">
-        <template class="popup-carousel">
-          <a-carousel arrows>
-            <div slot="prevArrow" class="custom-slick-arrow" style="left: 10px;zIndex: 1">
+      <PopupBoard :visible="visiblePopupBoard" @closePopup="hidePopup">
+        <template>
+          <a-carousel arrows class="carousel">
+            <div slot="prevArrow" class="custom-slick-arrow" style="left: 10px; zIndex: 1">
               <a-icon type="left-circle" />
             </div>
             <div slot="nextArrow" class="custom-slick-arrow" style="right: 10px">
               <a-icon type="right-circle" />
             </div>
-            <div><h3>1</h3></div>
-            <div><h3>2</h3></div>
-            <div><h3>3</h3></div>
-            <div><h3>4</h3></div>
+            <div class="slide-wrap" v-for="(slide, index) in sliderData" :key="index">
+              <a-row :gutter="[16, 16]">
+                <a-col :span="6" v-for="(item, i) in slide" :key="i">
+                  <div class="slide-item" :style="{ backgroundImage: `url(${item.itemPic})` }">
+                    <div class="item-detail" :title="item.itemName">
+                      {{ item.itemName.slice(0, 6) }}: {{ item.itemCount }}
+                    </div>
+                    <div class="item-mask"></div>
+                  </div>
+                </a-col>
+              </a-row>
+            </div>
           </a-carousel>
         </template>
       </PopupBoard>
@@ -77,6 +85,7 @@ import ScrollBoard2 from '../components/equipment_page/ScrollBoard2'
 import BarChart3 from '../components/equipment_page/BarChart3'
 import PieChart4 from '../components/equipment_page/PieChart4'
 import PopupBoard from '@/components/equipment_page/PopupBoard'
+import ImageArmor from '@/assets/images/item-armor.jpg'
 
 export default {
   name: 'EquipmentPage',
@@ -94,17 +103,114 @@ export default {
   },
   data() {
     return {
+      ImageArmor,
       visiblePopupBoard: false,
-      popupData: {}
+      popupData: {},
+      sliderData: {
+        0: [
+          {
+            itemName: '作战背心',
+            itemPicURL: ImageArmor
+          },
+          {
+            itemName: '作战背心',
+            itemPicURL: ImageArmor
+          },
+          {
+            itemName: '作战背心',
+            itemPicURL: ImageArmor
+          },
+          {
+            itemName: '作战背心',
+            itemPicURL: ImageArmor
+          },
+          {
+            itemName: '作战背心',
+            itemPicURL: ImageArmor
+          },
+          {
+            itemName: '作战背心',
+            itemPicURL: ImageArmor
+          },
+          {
+            itemName: '作战背心',
+            itemPicURL: ImageArmor
+          },
+          {
+            itemName: '作战背心',
+            itemPicURL: ImageArmor
+          }
+        ],
+        1: [
+          {
+            itemName: '作战背心',
+            itemPicURL: ImageArmor
+          },
+          {
+            itemName: '作战背心',
+            itemPicURL: ImageArmor
+          },
+          {
+            itemName: '作战背心',
+            itemPicURL: ImageArmor
+          },
+          {
+            itemName: '作战背心',
+            itemPicURL: ImageArmor
+          },
+          {
+            itemName: '作战背心',
+            itemPicURL: ImageArmor
+          },
+          {
+            itemName: '作战背心',
+            itemPicURL: ImageArmor
+          },
+          {
+            itemName: '作战背心',
+            itemPicURL: ImageArmor
+          },
+          {
+            itemName: '作战背心',
+            itemPicURL: ImageArmor
+          }
+        ]
+      }
     }
   },
   methods: {
-    showPopup(data) {
-      this.popupData = data
-      this.visiblePopupBoard = true
+    showPopup() {
+      // this.$http.get('user/slider').then(r => {
+      //   console.log(r)
+      // })
+      this.getCarouselData()
+      // this.popupData = data
+      // this.visiblePopupBoard = true
+    },
+    getCarouselData() {
+      this.$http.get('indexData/items').then(r => {
+        const data = r.data.data
+        const res = this.groupArray(data, 8)
+        this.sliderData = res
+        this.visiblePopupBoard = true
+      })
     },
     hidePopup() {
       this.visiblePopupBoard = false
+    },
+    groupArray(data, cols) {
+      return data
+        .reduce(
+          ([groups, subIndex], d) => {
+            if (subIndex === 0) {
+              groups.unshift([])
+            }
+            groups[0].push(d)
+            return [groups, (subIndex + 1) % cols]
+          },
+          [[], 0]
+        )[0]
+        .reverse()
     }
   }
 }
@@ -177,6 +283,39 @@ export default {
         }
       }
     }
+
+    .carousel {
+      .slide-wrap {
+        padding: 20px 40px 0 40px;
+        .slide-item {
+          position: relative;
+          height: 220px;
+          border: 1px solid #0f5c80;
+          background-color: #fff;
+          background-size: 100%;
+          background-repeat: no-repeat;
+          background-position: center;
+          .item-detail {
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 999;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            font-size: 18px;
+          }
+          .item-mask {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: #000;
+            opacity: 0.2;
+            z-index: 998;
+          }
+        }
+      }
+    }
   }
 }
 </style>
@@ -184,8 +323,8 @@ export default {
 /* carousel style */
 .ant-carousel >>> .slick-slide {
   text-align: center;
-  height: 160px;
-  line-height: 160px;
+  height: 500px;
+  /* line-height: 500px; */
   background: #364d79;
   overflow: hidden;
 }
